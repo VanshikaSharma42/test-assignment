@@ -2,14 +2,16 @@ import React from 'react'
 import About from './components/About'
 import Hero from './components/Hero'
 import PartialSection from './components/PartialSection'
+import ContactForm from './components/ContactForm'
 
 function App() {
   return (
     <div>
-      <Hero />
+      <ContactForm />
+      {/* <Hero /> */}
       <About />
-      <Hero />
       <PartialSection />
+      <Hero />
     </div>
   )
 }

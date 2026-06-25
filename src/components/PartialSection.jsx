@@ -68,12 +68,11 @@ export default function PartialSection() {
         (context) => {
           const { desktop, tablet, mobile } = context.conditions;
 
-          const gapX = desktop ? 150 : tablet ? 112 : 74;
+          const gapX = desktop ? 130 : tablet ? 112 : 74;
           const gapY = desktop ? -58 : tablet ? -44 : -31;
 
           const slideHeight = mobile ? 300 : tablet ? 330 : 360;
-          const centerOffset =
-            window.innerHeight / 2 - slideHeight / 2;
+          const centerOffset = window.innerHeight / 2 - slideHeight / 2;
 
           const textMove = -slideHeight;
           const countMove = -slideHeight;
@@ -101,10 +100,15 @@ export default function PartialSection() {
             const activeCard = getActiveCard(stepIndex);
 
             return {
-              scale: (i) => (i === activeCard ? 1.25 : 1),
-              x: (i) => (i === activeCard ? 10 : 0),
-              y: (i) => (i === activeCard ? -10 : 0),
-              opacity: 1,
+              scale: (i) => (i === activeCard ? 1.16 : 0.9),
+              x: (i) => (i === activeCard ? -36 : 12),
+              y: (i) => (i === activeCard ? 0 : 10),
+              opacity: (i) => (i === activeCard ? 1 : 0.45),
+              rotate: (i) => (i === activeCard ? 0 : -6),
+              filter: (i) =>
+                i === activeCard
+                  ? "grayscale(0) brightness(1.22) contrast(1.05) saturate(1.35)"
+                  : "grayscale(1) brightness(0.75) contrast(1)",
               ease: "none",
             };
           };
@@ -189,20 +193,20 @@ export default function PartialSection() {
         {steps.map((_, i) => (
           <div
             key={i}
-            className="partialCard absolute h-[230px] w-[230px] origin-center max-lg:h-[160px] max-lg:w-[160px] max-sm:h-[120px] max-sm:w-[120px]"
+            className="partialCard absolute h-[300px] w-[300px] origin-center max-lg:h-[180px] max-lg:w-[180px] max-sm:h-[120px] max-sm:w-[120px]"
           >
             <img src={block} alt="" className="h-full w-full object-contain" />
 
             <img
               src={icons[i]}
               alt=""
-              className="partialIcon absolute left-[55px] top-[68px] h-[82px] w-[82px] object-contain max-lg:left-[38px] max-lg:top-[47px] max-lg:h-[58px] max-lg:w-[58px] max-sm:left-[28px] max-sm:top-[35px] max-sm:h-[44px] max-sm:w-[44px]"
+              className="partialIcon absolute left-[92px] top-[104px] h-[100px] w-[100px] origin-center object-contain max-lg:left-[52px] max-lg:top-[52px] max-lg:h-[58px] max-lg:w-[58px] max-sm:left-[34px] max-sm:top-[38px] max-sm:h-[44px] max-sm:w-[44px]"
             />
           </div>
         ))}
       </div>
 
-      <div className="relative z-[40] flex h-full w-[48%] flex-col justify-center pl-[10.5vw] max-lg:w-full max-lg:justify-end max-lg:pb-[20vh] max-lg:pl-[22vw] max-sm:pb-[17vh]">
+      <div className="relative z-[9999] flex h-full w-[48%] flex-col justify-center pl-[10.5vw] max-lg:w-full max-lg:justify-end max-lg:pb-[20vh] max-lg:pl-[22vw] max-sm:pb-[17vh]">
         <div className="absolute left-[26vw] top-[17%] rounded-md border border-white/10 bg-white/[0.03] px-3 py-2 text-sm tracking-[1px] text-[#d7d7d7] max-lg:left-auto max-lg:right-[7vw] max-lg:top-[54%] max-sm:text-[10px]">
           PARTIAL <span className="text-[#777]">&gt;&gt;&gt;</span> TASK [04]
         </div>
