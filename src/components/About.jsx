@@ -56,7 +56,7 @@ export default function About() {
       const titles = gsap.utils.toArray(".about-title");
       const descs = gsap.utils.toArray(".about-desc");
       const nums = gsap.utils.toArray(".about-num");
-      const plusIcons = gsap.utils.toArray(".plus-icon");
+      const plusGrid = sectionRef.current.querySelector(".plus-grid");
       const labelPairs = gsap.utils.toArray(".about-label-pair");
       const aboutLabel = sectionRef.current.querySelector(".about-main-label");
 
@@ -98,47 +98,17 @@ export default function About() {
         );
       };
 
-      gsap.set(plusIcons, {
-        color: "#ffffff",
-        opacity: 0.9,
+      gsap.set(plusGrid, {
+        backgroundPosition: "0% 50%",
       });
 
-      const plusColors = [
-        "#38bdf8",
-        "#22d3ee",
-        "#2dd4bf",
-        "#22c55e",
-        "#a3e635",
-        "#ffffff",
-      ];
-
-      gsap
-        .timeline({
-          repeat: -1,
-          repeatDelay: 0.35,
-        })
-        .to(plusIcons, {
-          color: (i) => plusColors[i % plusColors.length],
-          opacity: 1,
-          duration: 0.7,
-          stagger: {
-            each: 0.055,
-            from: "start",
-            grid: [4, 4],
-          },
-          ease: "sine.inOut",
-        })
-        .to(plusIcons, {
-          color: "#ffffff",
-          opacity: 0.85,
-          duration: 0.9,
-          stagger: {
-            each: 0.055,
-            from: "start",
-            grid: [4, 4],
-          },
-          ease: "sine.inOut",
-        });
+      gsap.to(plusGrid, {
+        backgroundPosition: "220% 50%",
+        duration: 3.2,
+        ease: "none",
+        repeat: -1,
+        yoyo: true,
+      });
 
       gsap.set(groups, {
         y: -30,
@@ -178,7 +148,8 @@ export default function About() {
             opacity: index === activeIndex ? 1 : 0.72,
             scale: index === activeIndex ? 1.08 : 0.96,
             y: index === activeIndex ? -10 : 0,
-            filter: index === activeIndex ? activeIconFilter : inactiveIconFilter,
+            filter:
+              index === activeIndex ? activeIconFilter : inactiveIconFilter,
             duration: 0.45,
             ease: "power2.out",
           });
@@ -320,15 +291,26 @@ export default function About() {
       ref={sectionRef}
       className="relative h-screen overflow-hidden bg-black text-white"
     >
-      <div className="absolute left-8 top-10 grid grid-cols-4 gap-x-6 gap-y-5 text-3xl leading-none">
+      <div
+        className="plus-grid absolute left-8 top-10 grid grid-cols-4 gap-x-6 gap-y-5 text-3xl font-light leading-none"
+        style={{
+          background:
+            "linear-gradient(115deg, #38bdf8 0%, #22d3ee 22%, #2dd4bf 42%, #22c55e 65%, #a3e635 82%, #38bdf8 100%)",
+          backgroundSize: "260% 260%",
+          WebkitBackgroundClip: "text",
+          backgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+          filter: "drop-shadow(0 0 10px rgba(34, 211, 238, 0.35))",
+        }}
+      >
         {Array.from({ length: 16 }).map((_, i) => (
-          <span key={i} className="plus-icon select-none text-white">
+          <span key={i} className="select-none">
             +
           </span>
         ))}
       </div>
 
-      <p className="about-main-label absolute left-[36%] top-10 font-mono text-xs uppercase tracking-[0.12em] text-zinc-500">
+      <p className="about-main-label absolute left-[36%] top-10 font-mono text-sm uppercase tracking-[0.12em] text-zinc-500">
         ABOUT US
       </p>
 
@@ -338,7 +320,7 @@ export default function About() {
         Powering Tools
       </h2>
 
-      <div className="absolute left-11 top-[38%] z-20 flex flex-col items-center">
+      <div className="absolute left-11 top-[48%] z-20 flex flex-col items-center">
         {items.map((item, i) => (
           <React.Fragment key={item.no}>
             <div className="about-num flex h-14 w-14 items-center justify-center rounded-full border border-zinc-800 text-xl">
@@ -394,7 +376,7 @@ export default function About() {
         ))}
       </div>
 
-      <div className="absolute bottom-[8.5vh] right-[5vw] w-[300px] font-mono text-[14px] uppercase tracking-[-0.02em]">
+      <div className="absolute bottom-[8.5vh] right-[5vw] w-[300px] font-mono text-[16px] uppercase tracking-[-0.02em]">
         <div className="relative h-[44px] w-full">
           <div className="absolute left-0 top-0 w-[130px] text-center font-light text-[#f2f2f2]">
             SYSTEM
